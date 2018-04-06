@@ -1,25 +1,28 @@
 var connection = require('./connection.js');
 
 var orm = {
-    selectAll: function(tableName, colName, colValue, cb) {
-        var queryString = 'SELECT * FROM ?? WHERE ?? = ?';
-        connection.query(queryString, [tableName, colName, colValue], function(err, result) {
+    selectAll: function(tableInput, cb) {
+        var queryString = "SELECT * FROM " + tableInput + ";";
+        console.log(queryString);
+        connection.query(queryString, function(err, result) {
             if (err) throw err;
             console.log(result);
+            cb(result);
         });
     },
-    insertOne : function(tableName, colOne, colTwo, valOne, valTwo, idCol, idVal, cb) {
-        var queryString = 'INSERT INTO ?? (??, ??) VALUES (?, ?) WHERE ?? = ?'
-        connection.query(queryString, [tableName, colOne, colTwo, valOne, valTwo, idCol, idVal],function(err, result) {
+    insertOne : function(tableName, colOne, colTwo, valOne, valTwo, cb) {
+        var queryString = 'INSERT INTO ?? (??, ??) VALUES (?, ?)'
+        connection.query(queryString, [tableName, colOne, colTwo, valOne, valTwo],function(err, result) {
             if (err) throw err;
-            console.log(result);
+            cb(result);
         });
     },
-    updateOne : function(tableName, colOne, newColValue, colTwo, colTwoValue, cb) {
+    updateOne : function(tableName, colOne, newColValue, idCol, idValue, cb) {
         var queryString = 'UPDATE ?? SET ??=? WHERE ??=?';
-        connection.query(queryString, [tableName, colOne, newColValue, colTwo, colTwoValue], function(err, result) {
+        console.log(queryString);
+        connection.query(queryString, [tableName, colOne, newColValue, idCol, idValue], function(err, result) {
             if (err) throw err;
-            console.log(result);
+            cb(result);
         });
     }
 }

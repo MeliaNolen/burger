@@ -1,0 +1,47 @@
+<h1>Burgers not devoured</h1>
+
+<ul>
+    {{#each allBurgers}} 
+        {{#unless devoured}} 
+            <li>
+                {{burger_name}}
+
+                <button class="change-devoured" data-id="{{id}}" data-newDevoured="{{devoured}}">
+                    {{#if devoured}}DEVOURED!{{else}}READY TO EAT!{{/if}}
+                </button>
+            </li>
+        {{/unless}} 
+    {{/each}}
+</ul>
+
+<h1>Burgers devoured</h1>
+
+<ul>
+    {{#each allBurgers}} 
+        {{#if devoured}} 
+            <li>
+                {{burger_name}}
+
+                <button class="change-devoured" data-id="{{id}}" data-newDevoured="{{devoured}}">
+                    {{#if devoured}}DEVOURED!{{else}}READY TO EAT!{{/if}}
+                </button>
+            </li>        
+        {{/if}} 
+    {{/each}}</ul>
+
+<form>
+    <div class="form-group">
+        <label for="burger">Burger Name:</label>
+        <input type="text" id="burger" name="name">
+    </div>
+
+    <div class="form-group">
+        <label for="devoured">Eat this burger?</label>
+        <br>
+        <input type="radio" name="devoured" value="1" checked> Devour
+        <br>
+        <input type="radio" name="devoured" value="0"> Save for Later
+    </div>
+
+    <button id='submit-btn' type="submit">Add Burger</button>
+</form>
