@@ -4,7 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Burgers</title>
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script></head>
+    
+    <!-- Linking jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+    <!-- Linkning personal style sheet -->
+    <link rel="stylesheet" href="/assets/css/burger_style.css" type='text/css'>
+</head>
 
 <body>
     {{{ body }}}
@@ -12,8 +24,8 @@
         
             $(".change-devoured").on("click", function (event) {
                 var id = $(this).data("id");
-                var newDevoured = $(this).data("newDevoured");
-            
+                var newDevoured = $(this).attr("data-newDevoured");
+
                 var newDevouredState = {
                     devoured: newDevoured
                 };
@@ -34,7 +46,7 @@
 
                 var newBurger = {
                     name: $("#burger").val().trim(),
-                    devoured: $("[name=devoured]:checked").val().trim()
+                    devoured: 0
                 };
 
                 $.ajax("/api/burgers", {
